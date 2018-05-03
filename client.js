@@ -2,11 +2,14 @@
 var left = ['q', 'w', 'e', 'r', 't', 'a', 's', 'd', 'f', 'g', 'z', 'x', 'c', 'v'];
 var right = ['y', 'u', 'i', 'o', 'p', 'h', 'j', 'k', 'l', 'b', 'n', 'm'];
 
-console.log(left.length + right.length);
+var dvor_left = ['p', 'y', 'a', 'o', 'e', 'u', 'i', 'q', 'j', 'k'];
+var dvor_right = ['f', 'g', 'c', 'r', 'l', 'd', 'h', 't', 'n', 's', 'x', 'b', 'm', 'w', 'v', 'z'];
+
+console.log(dvor_left.length + dvor_right.length);
 
 function onlyLeft(word) {
   for (var i=0; i < word.length; i++) {
-    if (!left.includes(word[i])) {
+    if (!dvor_left.includes(word[i])) {
       return false;
     }
   }
@@ -15,7 +18,7 @@ function onlyLeft(word) {
 
 function onlyRight(word) {
   for (var i=0; i < word.length; i++) {
-    if (!right.includes(word[i])) {
+    if (!dvor_right.includes(word[i])) {
       return false;
     }
   }
@@ -38,9 +41,18 @@ arr.forEach(word => {
 
 console.log(leftArr, rightArr, ambiArr);
 
+var leftMax = '';
+var rightMax = '';
 
+leftArr.forEach(word => {
+  if (word.length > leftMax.length) leftMax = word;
+});
 
+rightArr.forEach(word => {
+  if (word.length > rightMax.length) rightMax = word;
+});
 
+console.log(leftMax, rightMax);
 
 
 
