@@ -9,7 +9,7 @@ console.log(dvor_left.length + dvor_right.length);
 
 function onlyLeft(word) {
   for (var i=0; i < word.length; i++) {
-    if (!dvor_left.includes(word[i])) {
+    if (!left.includes(word[i])) {
       return false;
     }
   }
@@ -18,7 +18,7 @@ function onlyLeft(word) {
 
 function onlyRight(word) {
   for (var i=0; i < word.length; i++) {
-    if (!dvor_right.includes(word[i])) {
+    if (!right.includes(word[i])) {
       return false;
     }
   }
@@ -41,6 +41,7 @@ arr.forEach(word => {
 
 console.log(leftArr, rightArr, ambiArr);
 
+// Find largest word in each set:
 var leftMax = '';
 var rightMax = '';
 
@@ -56,6 +57,34 @@ console.log(leftMax, rightMax);
 
 
 
+
+
+function scrambleKeys() {
+  var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+  var left = [];
+  var leftChosen = [];
+  while (left.length < 13) {
+    var index = Math.floor(Math.random() * alphabet.length);
+    // Otherwise just try again (i.e. re-enter loop):
+    if (!leftChosen.includes(index)) {
+      leftChosen.push(index);
+      left.push(alphabet[index]);
+      alphabet.splice(index, 1);
+    }
+  }
+  return {
+    left: left,
+    right: alphabet
+  };
+}
+
+function checkOneHandWords(keyboard) {
+
+}
+
+var keyboard = scrambleKeys();
+console.log(keyboard);
 
 
 
