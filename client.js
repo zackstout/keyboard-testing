@@ -7,18 +7,18 @@ var dvor_right = ['f', 'g', 'c', 'r', 'l', 'd', 'h', 't', 'n', 's', 'x', 'b', 'm
 
 console.log(dvor_left.length + dvor_right.length);
 
-function onlyLeft(word) {
+function onlyLeft(word, board) {
   for (var i=0; i < word.length; i++) {
-    if (!left.includes(word[i])) {
+    if (!board.includes(word[i])) {
       return false;
     }
   }
   return true;
 }
 
-function onlyRight(word) {
+function onlyRight(word, board) {
   for (var i=0; i < word.length; i++) {
-    if (!right.includes(word[i])) {
+    if (!board.includes(word[i])) {
       return false;
     }
   }
@@ -34,8 +34,8 @@ var rightArr = [];
 var ambiArr = [];
 
 arr.forEach(word => {
-  if (onlyLeft(word)) leftArr.push(word);
-  else if (onlyRight(word)) rightArr.push(word);
+  if (onlyLeft(word, left)) leftArr.push(word);
+  else if (onlyRight(word, right)) rightArr.push(word);
   else ambiArr.push(word);
 });
 
@@ -80,11 +80,59 @@ function scrambleKeys() {
 }
 
 function checkOneHandWords(keyboard) {
-
+  var leftWords = [];
+  var rightWords = [];
+  var ambiWords = [];
+  arr.forEach(word => {
+    if (onlyLeft(word, keyboard.left)) leftWords.push(word);
+    else if (onlyRight(word, keyboard.right)) rightWords.push(word);
+    else ambiWords.push(word);
+  });
+  return {
+    left: leftWords,
+    right: rightWords,
+    ambi: ambiWords
+  };
 }
 
 var keyboard = scrambleKeys();
 console.log(keyboard);
+
+var words = checkOneHandWords(keyboard);
+console.log(words);
+
+var maxWords = 0;
+var best = {
+  keyboard: '',
+  words: ''
+};
+
+for (var i=0; i < 5000; i++) {
+  var keyboard = scrambleKeys();
+  var words = checkOneHandWords(keyboard);
+  if (words.left.length > maxWords) {
+    maxWords = words.left;
+    best.keyboard = keyboard;
+    best.words = words;
+  }
+  if (words.right.length > maxWords) {
+    maxWords = words.right;
+    best.keyboard = keyboard;
+    best.words = words;
+  }
+}
+
+console.log(best);
+
+
+
+
+
+
+
+
+
+
 
 
 
